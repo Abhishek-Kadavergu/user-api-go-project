@@ -18,12 +18,10 @@ import (
 
 func main() {
 
-	// Load .env file (development only)
 	if err := godotenv.Load(); err != nil {
 		log.Println("No .env file found, using system env vars")
 	}
 
-	// Validate required env vars
 	dbURL := os.Getenv("DATABASE_URL")
 	if dbURL == "" {
 		log.Fatal("DATABASE_URL not set")
@@ -31,7 +29,6 @@ func main() {
 
 	app := fiber.New()
 
-	// Custom logger (rename to avoid conflict)
 	appLogger := logger.New()
 
 	db := config.ConnectDB()
